@@ -84,10 +84,13 @@ CREATE TABLE bookings(
 
 ## SQL Queries
 
-### Query 1: Get All Bookings with Customer and Vehicle Details
+### Query 1:JOIN
 
-**Purpose**: Retrieve a comprehensive list of all bookings with associated customer names, vehicle information, and booking status.
+Retrieve booking information along with:
 
+Customer name
+Vehicle name
+Concepts used: INNER JOIN
 **Solution**:
 ```sql
 SELECT 
@@ -111,9 +114,11 @@ INNER JOIN vehicles AS v ON b.vehicle_id = v.vehicle_id;
 
 ---
 
-### Query 2: Find Vehicles Never Booked
+### Query 2: EXISTS
 
-**Purpose**: Identify vehicles that have never been rented (new stock or rarely requested vehicles).
+Find all vehicles that have never been booked.
+
+Concepts used: NOT EXISTS
 
 **Solution**:
 ```sql
@@ -133,10 +138,11 @@ WHERE NOT EXISTS
 
 ---
 
-### Query 3: Find Available Cars
+### Query 3: WHERE
 
-**Purpose**: Display all available cars ready for immediate rental.
+Retrieve all available vehicles of a specific type (e.g. cars).
 
+Concepts used: SELECT, WHERE
 **Solution**:
 ```sql
 SELECT * FROM vehicles
@@ -152,10 +158,11 @@ WHERE status = 'available' AND type ILIKE 'car';
 
 ---
 
-### Query 4: Identify Most Frequently Booked Vehicles
+### Query 4: GROUP BY and HAVING
 
-**Purpose**: Find vehicles that have been booked more than twice, indicating high-demand inventory.
+Find the total number of bookings for each vehicle and display only those vehicles that have more than 2 bookings.
 
+Concepts used: GROUP BY, HAVING, COUNT
 **Solution**:
 ```sql
 SELECT 
@@ -194,32 +201,6 @@ HAVING COUNT(*) > 2;
 - **Operations Manager**: Use Query 3 to manage available inventory and Query 2 to identify unused stock
 - **Customer Service**: Use Query 1 to access booking details and history
 
----
-
-## Best Practices
-
-1. **Data Integrity**: Always maintain referential integrity through foreign keys
-2. **Status Management**: Keep vehicle and booking statuses updated in real-time
-3. **Performance**: Add indexes on frequently queried columns (user_id, vehicle_id, status)
-4. **Backup**: Regularly backup the database to prevent data loss
-5. **Validation**: Validate user input before inserting into the database
-
----
-
-## Future Enhancements
-
-- Add payment tracking and transaction history
-- Implement vehicle maintenance scheduling
-- Add customer ratings and reviews
-- Create advanced analytics dashboard
-- Implement multi-location support
-- Add insurance and damage tracking
-
----
-
-## License
-
-This project is provided as-is for educational and assignment purposes.
 
 ---
 
